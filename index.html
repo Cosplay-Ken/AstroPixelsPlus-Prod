@@ -1,5 +1,5 @@
 <script type="module">
-import * as esptool from "https://unpkg.com/esptool-js@0.5.4/dist/web/index.js";
+import { ESPLoader, Transport } from "https://unpkg.com/esptool-js@0.5.4/dist/web/index.js";
 
 const status = (msg) => {
     document.getElementById("status").innerText = msg;
@@ -12,40 +12,44 @@ async function connectAndFlash() {
         const port = await navigator.serial.requestPort();
         await port.open({ baudRate: 115200 });
 
-        status("Connecting to ESP32 bootloader...");
+        const transport = new Transport(port);
 
-        const transport = new esptool.Transport(port);
-        const loader = new esptool.ESPLoader({
+        status("Connecting to ESP32 (hold BOOT if needed)...");
+
+        const loader = new ESPLoader({
             transport,
-            baudrate: 115200
+            baudrate: 115200,
         });
 
         await loader.main();
 
-        status("Loading firmware...");
+        status("ESP32 detected ✔ Loading firmware...");
 
-        const resp = await fetch("firmware/firmware.bin");
-        const firmware = await resp.arrayBuffer();
+        const firmware = await fetch("firmware/firmware.bin")
+            .then(r => r.arrayBuffer());
 
-        status("Flashing... DO NOT DISCONNECT");
+        status("Erasing flash...");
+
+        await loader.eraseFlash();
+
+        status("Flashing firmware...");
 
         await loader.writeFlash(
             firmware,
-            0x10000
+            0x10000   // standard app offset for ESP32 Arduino builds
         );
 
-        status("Flash complete ✔ Rebooting device");
+        status("Finalizing...");
 
         await loader.hardReset();
 
-        status("Done ✔");
+        status("Flash complete ✔ Device restarting");
 
-    } catch (e) {
-        console.error(e);
-        status("Error: " + e.message);
+    } catch (err) {
+        console.error(err);
+        status("ERROR: " + err.message);
     }
 }
 
-// expose globally for button
 window.connectAndFlash = connectAndFlash;
 </script>
