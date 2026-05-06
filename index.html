@@ -25,7 +25,8 @@ async function connectAndFlash() {
 
         status("ESP32 detected ✔ Loading firmware...");
 
-        const firmware = await fetch("firmware/firmware.bin")
+        const firmwareURL = "https://cosplay-ken.github.io/astropixelsplus-prod/firmware/firmware.bin";
+const firmware = await fetch(firmwareURL).then(r => r.arrayBuffer());
             .then(r => r.arrayBuffer());
 
         status("Erasing flash...");
