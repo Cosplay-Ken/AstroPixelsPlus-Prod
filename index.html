@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Firmware Installer</title>
+  <!-- Link to the ESP Web Tools Script -->
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <style>
   body { 
     background-color: #f9f9f9; /* Light background */
@@ -34,3 +40,16 @@
     background-color: #0256b9;
   }
 </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AstroPixelsPlus Custom Installer</h1>
+    <p>Connect your device via USB and click below.</p>
+    
+    <!-- The Custom Button -->
+    <esp-web-install-button manifest="./manifest.json">
+      <button slot="activate">Connect to Device</button>
+    </esp-web-install-button>
+  </div>
+</body>
+</html>
