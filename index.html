@@ -1,55 +1,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Firmware Installer</title>
-  <!-- Link to the ESP Web Tools Script -->
+  <meta charset="UTF-8">
+  <title>AstroPixelsPlus Installer</title>
+
   <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
-<style>
-  body { 
-    background-color: #f9f9f9; /* Light background */
-    color: #333333;           /* Dark text for readability */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    margin: 0; 
-  }
 
-  .card { 
-    text-align: center; 
-    border: 1px solid #ddd;   /* Subtle border */
-    padding: 3rem; 
-    border-radius: 12px; 
-    background: white;        /* White card */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Soft shadow for depth */
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: #e5e7eb;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* Optional: Make the button stand out more */
-  button[slot="activate"] {
-    background-color: #0366d6;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+    .card {
+      width: 420px;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+    }
 
-  button[slot="activate"]:hover {
-    background-color: #0256b9;
-  }
-</style>
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      opacity: 0.75;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    esp-web-install-button {
+      display: block;
+      margin-top: 10px;
+    }
+
+    button[slot="activate"] {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button[slot="activate"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(37, 99, 235, 0.45);
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 11px;
+      opacity: 0.5;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59,130,246,0.3);
+    }
+  </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>AstroPixelsPlus Custom Installer</h1>
-    <p>Connect your device via USB and click below.</p>
+
+  <div class="card">
+
     
-    <!-- The Custom Button -->
+    <h1>AstroPixelsPlus Firmware</h1>
+    <p>Connect your device via USB and install the latest firmware.</p>
+
     <esp-web-install-button manifest="./manifest.json">
-      <button slot="activate">Connect to Device</button>
+      <button slot="activate">Connect & Install</button>
     </esp-web-install-button>
+
+    <div class="footer">
+      Chrome / Edge required • USB connection required
+    </div>
+
   </div>
+
 </body>
 </html>
