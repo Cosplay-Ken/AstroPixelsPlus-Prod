@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AstroPixelsPlus Firmware</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f1117;
+      color: white;
+      text-align: center;
+      margin: 0;
+    }
+
+    .header {
+      background: #1f2937;
+      padding: 20px;
+      font-size: 24px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #111827;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #3b82f6;
+      border: none;
+      padding: 12px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+  AstroPixelsPlus Firmware Installer
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Download Firmware</h2>
+    <p>Latest build</p>
+    <button onclick="downloadFirmware()">Download</button>
+  </div>
+
+  <div class="card">
+    <h2>Instructions</h2>
+    <p>
+      1. Download firmware<br>
+      2. Connect ESP32<br>
+      3. Flash using your tool
+    </p>
+  </div>
+
+</div>
+
+<script>
+function downloadFirmware() {
+  window.location.href = "firmware/firmware.bin";
+}
+</script>
+
+</body>
+</html>
