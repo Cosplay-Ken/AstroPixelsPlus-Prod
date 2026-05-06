@@ -1,118 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>AstroPixelsPlus Installer</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0b0f19;
-      color: white;
-      text-align: center;
-    }
-
-    .header {
-      padding: 25px;
-      font-size: 24px;
-      background: #111827;
-    }
-
-    .card {
-      max-width: 700px;
-      margin: 40px auto;
-      background: #111827;
-      padding: 25px;
-      border-radius: 12px;
-    }
-
-    button {
-      padding: 14px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #3b82f6;
-      color: white;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    button:hover {
-      background: #2563eb;
-    }
-
-    .status {
-      margin-top: 15px;
-      opacity: 0.7;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="header">
-  AstroPixelsPlus USB Installer
-</div>
-
-<div class="card">
-
-  <h2>Step 1 — Connect Device</h2>
-
-  <button onclick="connectAndFlash()">
-    CONNECT & FLASH
-  </button>
-
-  <div class="status" id="status">
-    Waiting for device...
-  </div>
-
-</div>
-
 <script type="module">
-import { ESPLoader, Transport } from "https://unpkg.com/esptool-js@0.5.4/dist/web/index.js";
+import * as esptool from "https://unpkg.com/esptool-js@0.5.4/dist/web/index.js";
+
+const status = (msg) => {
+    document.getElementById("status").innerText = msg;
+};
 
 async function connectAndFlash() {
-    const status = document.getElementById("status");
-
     try {
-        status.innerText = "Requesting device...";
+        status("Requesting USB device...");
 
-        // Open USB port
         const port = await navigator.serial.requestPort();
         await port.open({ baudRate: 115200 });
 
-        status.innerText = "Connecting to ESP32...";
+        status("Connecting to ESP32 bootloader...");
 
-        const transport = new Transport(port);
-        const loader = new ESPLoader({
+        const transport = new esptool.Transport(port);
+        const loader = new esptool.ESPLoader({
             transport,
-            baudrate: 115200,
+            baudrate: 115200
         });
 
         await loader.main();
 
-        status.innerText = "Flashing firmware...";
+        status("Loading firmware...");
 
-        // Your firmware file
-        const firmwareResponse = await fetch("firmware/firmware.bin");
-        const firmwareArrayBuffer = await firmwareResponse.arrayBuffer();
+        const resp = await fetch("firmware/firmware.bin");
+        const firmware = await resp.arrayBuffer();
 
-        await loader.flashData(
-            firmwareArrayBuffer,
-            0x10000 // standard app address
+        status("Flashing... DO NOT DISCONNECT");
+
+        await loader.writeFlash(
+            firmware,
+            0x10000
         );
 
-        status.innerText = "Flash complete ✔ Restarting device";
+        status("Flash complete ✔ Rebooting device");
 
         await loader.hardReset();
 
-    } catch (err) {
-        console.error(err);
-        status.innerText = "Error: " + err.message;
+        status("Done ✔");
+
+    } catch (e) {
+        console.error(e);
+        status("Error: " + e.message);
     }
 }
-</script>
 
-</body>
-</html>
+// expose globally for button
+window.connectAndFlash = connectAndFlash;
+</script>
