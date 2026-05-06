@@ -1,56 +1,23 @@
-<script type="module">
-import { ESPLoader, Transport } from "https://unpkg.com/esptool-js@0.5.4/dist/web/index.js";
-
-const status = (msg) => {
-    document.getElementById("status").innerText = msg;
-};
-
-async function connectAndFlash() {
-    try {
-        status("Requesting USB device...");
-
-        const port = await navigator.serial.requestPort();
-        await port.open({ baudRate: 115200 });
-
-        const transport = new Transport(port);
-
-        status("Connecting to ESP32 (hold BOOT if needed)...");
-
-        const loader = new ESPLoader({
-            transport,
-            baudrate: 115200,
-        });
-
-        await loader.main();
-
-        status("ESP32 detected ✔ Loading firmware...");
-
-        const firmwareURL = "https://cosplay-ken.github.io/astropixelsplus-prod/firmware/firmware.bin";
-const firmware = await fetch(firmwareURL).then(r => r.arrayBuffer());
-            .then(r => r.arrayBuffer());
-
-        status("Erasing flash...");
-
-        await loader.eraseFlash();
-
-        status("Flashing firmware...");
-
-        await loader.writeFlash(
-            firmware,
-            0x10000   // standard app offset for ESP32 Arduino builds
-        );
-
-        status("Finalizing...");
-
-        await loader.hardReset();
-
-        status("Flash complete ✔ Device restarting");
-
-    } catch (err) {
-        console.error(err);
-        status("ERROR: " + err.message);
-    }
-}
-
-window.connectAndFlash = connectAndFlash;
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Firmware Installer</title>
+  <!-- Link to the ESP Web Tools Script -->
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #1a1a1a; color: white; }
+    .container { border: 1px solid #444; padding: 20px; display: inline-block; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AstroPixelsPlus Custom Installer</h1>
+    <p>Connect your device via USB and click below.</p>
+    
+    <!-- The Custom Button -->
+    <esp-web-install-button manifest="./manifest.json">
+      <button slot="activate">Connect to Device</button>
+    </esp-web-install-button>
+  </div>
+</body>
+</html>
