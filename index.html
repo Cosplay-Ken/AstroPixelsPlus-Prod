@@ -7,62 +7,44 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial;
       background: #0b0f19;
-      color: #fff;
+      color: white;
+      text-align: center;
     }
 
     .header {
       padding: 25px;
-      text-align: center;
-      font-size: 26px;
+      font-size: 24px;
       background: #111827;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px;
     }
 
     .card {
+      max-width: 700px;
+      margin: 40px auto;
       background: #111827;
       padding: 25px;
       border-radius: 12px;
-      margin-bottom: 20px;
     }
 
-    .title {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      opacity: 0.7;
-      margin-bottom: 20px;
-    }
-
-    .install-btn {
-      width: 100%;
-      padding: 15px;
-      font-size: 18px;
+    button {
+      padding: 14px 20px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
       background: #3b82f6;
       color: white;
       cursor: pointer;
-      transition: 0.2s;
+      width: 100%;
     }
 
-    .install-btn:hover {
+    button:hover {
       background: #2563eb;
     }
 
-    .small {
-      font-size: 12px;
-      opacity: 0.6;
-      margin-top: 10px;
+    .status {
+      margin-top: 15px;
+      opacity: 0.7;
     }
   </style>
 </head>
@@ -70,32 +52,65 @@
 <body>
 
 <div class="header">
-  AstroPixelsPlus Firmware Installer
+  AstroPixelsPlus USB Installer
 </div>
 
-<div class="container">
+<div class="card">
 
-  <div class="card">
-    <div class="title">Step 1 — Prepare Installation</div>
-    <div class="subtitle">
-      This will download the latest firmware build for your device.
-    </div>
+  <h2>Step 1 — Connect Device</h2>
 
-    <button class="install-btn" onclick="startInstall()">
-      INSTALL FIRMWARE
-    </button>
+  <button onclick="connectAndFlash()">
+    CONNECT & FLASH
+  </button>
 
-    <div class="small">
-      Make sure your device is ready before proceeding.
-    </div>
+  <div class="status" id="status">
+    Waiting for device...
   </div>
 
 </div>
 
-<script>
-function startInstall() {
-  // For now: trigger download
-  window.location.href = "firmware/firmware.bin";
+<script type="module">
+import { ESPLoader, Transport } from "https://unpkg.com/esptool-js@0.5.4/dist/web/index.js";
+
+async function connectAndFlash() {
+    const status = document.getElementById("status");
+
+    try {
+        status.innerText = "Requesting device...";
+
+        // Open USB port
+        const port = await navigator.serial.requestPort();
+        await port.open({ baudRate: 115200 });
+
+        status.innerText = "Connecting to ESP32...";
+
+        const transport = new Transport(port);
+        const loader = new ESPLoader({
+            transport,
+            baudrate: 115200,
+        });
+
+        await loader.main();
+
+        status.innerText = "Flashing firmware...";
+
+        // Your firmware file
+        const firmwareResponse = await fetch("firmware/firmware.bin");
+        const firmwareArrayBuffer = await firmwareResponse.arrayBuffer();
+
+        await loader.flashData(
+            firmwareArrayBuffer,
+            0x10000 // standard app address
+        );
+
+        status.innerText = "Flash complete ✔ Restarting device";
+
+        await loader.hardReset();
+
+    } catch (err) {
+        console.error(err);
+        status.innerText = "Error: " + err.message;
+    }
 }
 </script>
 
