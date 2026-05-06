@@ -2,43 +2,67 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>AstroPixelsPlus Firmware</title>
+  <title>AstroPixelsPlus Installer</title>
+
   <style>
     body {
-      font-family: Arial;
-      background: #0f1117;
-      color: white;
-      text-align: center;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f19;
+      color: #fff;
     }
 
     .header {
-      background: #1f2937;
-      padding: 20px;
-      font-size: 24px;
+      padding: 25px;
+      text-align: center;
+      font-size: 26px;
+      background: #111827;
+      font-weight: bold;
     }
 
     .container {
       max-width: 800px;
       margin: auto;
-      padding: 20px;
+      padding: 30px;
     }
 
     .card {
       background: #111827;
-      padding: 20px;
-      margin: 15px 0;
-      border-radius: 10px;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
     }
 
-    button {
-      background: #3b82f6;
+    .title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .install-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
       border: none;
-      padding: 12px;
+      border-radius: 8px;
+      background: #3b82f6;
       color: white;
-      border-radius: 6px;
       cursor: pointer;
-      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .install-btn:hover {
+      background: #2563eb;
+    }
+
+    .small {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -52,24 +76,25 @@
 <div class="container">
 
   <div class="card">
-    <h2>Download Firmware</h2>
-    <p>Latest build</p>
-    <button onclick="downloadFirmware()">Download</button>
-  </div>
+    <div class="title">Step 1 — Prepare Installation</div>
+    <div class="subtitle">
+      This will download the latest firmware build for your device.
+    </div>
 
-  <div class="card">
-    <h2>Instructions</h2>
-    <p>
-      1. Download firmware<br>
-      2. Connect ESP32<br>
-      3. Flash using your tool
-    </p>
+    <button class="install-btn" onclick="startInstall()">
+      INSTALL FIRMWARE
+    </button>
+
+    <div class="small">
+      Make sure your device is ready before proceeding.
+    </div>
   </div>
 
 </div>
 
 <script>
-function downloadFirmware() {
+function startInstall() {
+  // For now: trigger download
   window.location.href = "firmware/firmware.bin";
 }
 </script>
