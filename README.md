@@ -61,7 +61,7 @@ The other improvement (and the main reason for doing this project) is automated 
 Calm - *HLC1  
 Normal - *HLN1  
 Excited - *HLE1  
-Save - *HLSV1  
+Save - *HLSV  
 
 Further cusrtomazation can be found in the AstroPixlesPlus web interface. A new 'Holoprojector' screen has been added on the main screen. From here you can adjust the minimum and maximum values for Burst behivior, burst speed, and idle time. Adjusting these settings will update live and can be noticed within a  few seconds of activation. There is a save button that can save the current values so the next time the system restarts it will start up at what it was saved at, otherwise it reverts to 'Normal" mode. 
 
@@ -80,7 +80,7 @@ If you adjust the settings via the sliders they update in real time. If you adju
 </div>
 
  
-The decritptions of the setting is as follows.
+### Slider Description
 
 ### Burst Size
 How many movements happen in a row. This controls how many quick actions happen before the system pauses.
@@ -94,14 +94,14 @@ How fast actions happen. This is the delay between movements inside a burst.
 400–900 ms → natural mechanical motion (recommended)
 900–1500 ms → slow, heavy, deliberate movement
 
-### Ide Time
+### Idle Time
 Pause between bursts. This is how long the system “does nothing” before starting another burst.
 1000–3000 ms → very active, almost constantly moving
 3000–8000 ms → balanced, natural idle behavior (good default)
 8000–20000 ms → slow, observant, cinematic R2-style pauses
 
-### Web Installer: 
+## Web Installer: 
 https://cosplay-ken.github.io/AstroPixelsPlus-Prod/
  
-### Origional AstroPixlesPlus Documentation
+## Origional AstroPixlesPlus Documentation
 https://github.com/reeltwo/AstroPixelsPlus
