@@ -61,18 +61,23 @@ The other improvement (and the main reason for doing this project) is automated 
 Calm - *HLC1  
 Normal - *HLN1  
 Excited - *HLE1  
+Save - *HLSV1  
 
 Further cusrtomazation can be found in the AstroPixlesPlus web interface. A new 'Holoprojector' screen has been added on the main screen. From here you can adjust the minimum and maximum values for Burst behivior, burst speed, and idle time. Adjusting these settings will update live and can be noticed within a  few seconds of activation. There is a save button that can save the current values so the next time the system restarts it will start up at what it was saved at, otherwise it reverts to 'Normal" mode. 
 
 If you adjust the settings via the sliders they update in real time. If you adjust the moods via serial commands, or pressing the preset buttons, you have to push 'Refresh Sliders' in order to see the current values. 
 
-<table>
-  <tr>
-<td><img width="288" height="624" alt="Screenshot_20260507-082505" src="https://github.com/user-attachments/assets/442c121d-7e9d-4796-ade8-8c625ccf3b91" /></td>
- 
-<td><img width="288" height="624" alt="Screenshot_20260507-082519" src="https://github.com/user-attachments/assets/1f497b4d-5bc4-439d-bda0-0b8f9344ee8e" /></td>
-</table>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <!-- First Image -->
+    <td><img width="288" height="624" alt="Screenshot_20260507-082505" src="https://github.com/user-attachments/assets/442c121d-7e9d-4796-ade8-8c625ccf3b91" /></td>
+       <td width="80"></td>
+     <!-- Second Image -->
+    <td><img width="288" height="624" alt="Screenshot_20260507-082519" src="https://github.com/user-attachments/assets/1f497b4d-5bc4-439d-bda0-0b8f9344ee8e" /></td>
+    </tr>
+  </table>
+</div>
 
  
 The decritptions of the setting is as follows.
