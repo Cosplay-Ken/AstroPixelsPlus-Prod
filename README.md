@@ -1,6 +1,6 @@
 # FORK Information
 
-## Reson:
+## Reason:
 This fork was created to provide a reliable, stable, and fully non-blocking solution for automated holoprojector movement when paired with the DroidLink ecosystem created by Fred Moore.  
 
 The original DroidLink + Maestro setup works extremely well for dome panels and sequencing, but automated holoprojector behavior could interfere with running panel scripts and other timed actions. This project moves holoprojector automation away from the Maestro and into AstroPixelsPlus, allowing both systems to operate independently without conflicts.
@@ -39,7 +39,7 @@ The R2 Touch app continues to function normally and can also trigger these same 
 
 Additional customization is available directly through the AstroPixelsPlus web interface. A new Holoprojector configuration panel has been added for live tuning and adjustment.
 
-## Instrucrions:
+## Instructions:
 
 This is a modified version of the AstroPixelsPlus firmware designed specifically to integrate more cleanly with the DroidLink astromech control system developed by Fred Moore.
 
@@ -94,7 +94,6 @@ The servo board layout has changed for this configuration. You can still use bot
 </table>
 
 ## Web Interface
-
 A new Holoprojector page has been added to the AstroPixelsPlus web interface.
 
 From this screen you can adjust:
@@ -154,6 +153,14 @@ These are the serial commands that can be sent from the DroidLink Display to tur
 * Save - *HLSV 
 * Automation On - *HLON
 * Automation Off - *HLOFF
+
+## Acknowledgements
+When a serial command is processed, or a preset button is used in the web portal, a short acknowledgement signal is emitted from Holoprojector 1.
+
+* Calm — Blue
+* Normal — Green
+* Excited — Red
+* Saved — Flashing White
 
 ## Web Installer: 
 https://cosplay-ken.github.io/AstroPixelsPlus-Prod/
