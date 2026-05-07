@@ -9,7 +9,8 @@ To have a non blocking way to automate, custominze, and control the random behiv
 ## Results:
 Holoprojector movement, control, and automation has been offloaded from maestro to AstropixlesPlus. These movements can be inturupted if specific movemends are sent with other serial commands (such as stopping front holoprojector movement during the Leia playback message)
 
-
+## Control:
+main control is by sending serial commands from the DroidLink Display for controlling moods (calm, Normal, excited, Save). The R2 Touch app still works as it always has and buttons within it can be pregrammed with the same serial commands, although I do not use the R2 Touch app (maybe sometimes during testing). Further cusrtomazation can be access in the AstroPixelsPlus web interface. A new 'Holoprojector' panel has been added where additional customazation can be made. 
 
 ## Instrucrions:
 
