@@ -1,24 +1,61 @@
 # FORK Information
 
 ## Reson:
-I could not find a reliable, stable, non blocking way to have the DroidLInk Dome maestro automate random holoprojector movements and moods without interfeering with existing panel sequences and scripts. 
+This fork was created to provide a reliable, stable, and fully non-blocking solution for automated holoprojector movement within the DroidLink ecosystem.  
+
+The original DroidLink + Maestro setup works extremely well for dome panels and sequencing, but automated holoprojector behavior could interfere with running panel scripts and other timed actions. This project moves holoprojector automation away from the Maestro and into AstroPixelsPlus, allowing both systems to operate independently without conflicts.
 
 ## Scope: 
-To have a non blocking way to automate, custominze, and control the random behivior of the holoprojectors to free up scripting and sequences from the dome panel Maestro of DroidLink. Aslo to be able to inturupt the automation when specific movements are required, then resume after complete.
+The goal of this project is to:
+
+* Provide fully non-blocking automated holoprojector movement
+* Allow customizable random holoprojector behavior
+* Free DroidLink panel scripting from holoprojector management
+* Allow automated movements to be interrupted for scripted actions
+* Automatically resume idle behavior after scripted movements complete
 
 ## Results:
-Holoprojector movement, control, and automation has been offloaded from maestro to AstropixlesPlus. These movements can be inturupted if specific movemends are sent with other serial commands (such as stopping front holoprojector movement during the Leia playback message)
+Holoprojector movement and automation have been fully offloaded from the Maestro to AstroPixelsPlus.
+
+This allows:
+
+* Independent automated holoprojector behavior
+* Cleaner DroidLink panel scripting
+* Real-time mood changes
+* Interruptible movements for special sequences
+
+Example: during a Leia playback sequence, the front holoprojector can stop moving while audio or scripted events occur, then automatically resume idle behavior afterward.
 
 ## Control:
-main control is by sending serial commands from the DroidLink Display for controlling moods (calm, Normal, excited, Save). The R2 Touch app still works as it always has and buttons within it can be pregrammed with the same serial commands, although I do not use the R2 Touch app (maybe sometimes during testing). Further cusrtomazation can be access in the AstroPixelsPlus web interface. A new 'Holoprojector' panel has been added where additional customazation can be made. 
+Primary control is handled through serial commands sent from the DroidLink Display system to control holoprojector moods:
 
+* Calm
+* Normal
+* Excited
+* Save Current Settings
+
+The R2 Touch app continues to function normally and can also trigger these same commands if desired.
+
+Additional customization is available directly through the AstroPixelsPlus web interface. A new Holoprojector configuration panel has been added for live tuning and adjustment.
 ## Instrucrions:
 
-This is a modification of the AstroPixlesPlus firmware that better incorporates with the DroidLink astromech control system developed by Fred Moore. DroidLink is best used with Polulu Maestro servo boards but does not script the automated holoprojector movements very well. This update keeps the Holoprojectors attached to AstroPixelsPlus and adds automation and customazation to randomely move the 3 holoprojectors and toggle to three preset modes. It offers 4 new serail commands to add to DroidLink Display to trigger these moods with the press of a button. Additional customazation can be performed in the AstopPixels Plus GUI by adjusting settings sliders to meet your particular needs. The setting take affect immediately and can also be saved, so the settings return after a reboot.  
+This is a modified version of the AstroPixelsPlus firmware designed specifically to integrate more cleanly with the DroidLink astromech control system developed by Fred Moore.
 
-All functionality of the origional AstroPixelsPlus firmware have been retained but some changes were made to align with using DroidLink.  The following prequestie is required for this configuration.
+DroidLink works exceptionally well with Pololu Maestro Servo Controllers
+ for dome panel control, but automated holoprojector movement was difficult to manage cleanly through Maestro scripting alone.
 
-Servo Board layout has changed. Board 1 (position 1-6) are now assigned to the holoprojectr servos. Board 2 (position 1-13) are assigned to panels. If using droidLink board 2 is no longer required since panel movement will be controled by the maestro board. 
+This fork keeps the holoprojectors connected to AstroPixelsPlus while adding:
+
+* Automated random holoprojector movement
+* Multiple movement “moods”
+* Real-time customization
+* Non-blocking behavior
+* Script interruption handling
+* Web-based tuning controls
+
+All original AstroPixelsPlus functionality has been retained, although some configuration changes were made to better align with DroidLink usage.
+
+The servo board layout has changed for this configuration.
 
 <table align="center">
 <tr>
@@ -54,6 +91,36 @@ Servo Board layout has changed. Board 1 (position 1-6) are now assigned to the h
 </td>
 </tr>
 </table>
+
+Automated Holoprojector Movement
+
+The primary feature of this project is automated holoprojector movement with live customization.
+
+AstroPixelsPlus automatically begins random holoprojector movement during startup. Three preset “moods” can be triggered at any time using serial commands from DroidLink Display.
+
+
+
+Web Interface
+
+A new Holoprojector page has been added to the AstroPixelsPlus web interface.
+
+From this screen you can adjust:
+
+Burst Size
+Burst Speed
+Idle Time
+
+Changes update live in real time and can usually be observed within a few seconds.
+
+Settings can also be saved so they persist after reboot. If settings are not saved, the system defaults back to Normal mode during startup.
+
+Important
+Slider adjustments update immediately in real time
+Preset buttons and serial commands also update the active settings
+After changing modes via serial command or preset button, press Refresh Sliders to update the displayed values in the GUI
+
+
+
 
 
 The other improvement (and the main reason for doing this project) is automated holoprojector movements with cusomeazation. I set up Astropixles to randomly move the 3 holoprojectors automatically upon system bootup.  Three moods are preset that can be activated by sending serial commands from the DroidLink Display.
