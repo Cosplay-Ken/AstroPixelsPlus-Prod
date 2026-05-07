@@ -1,7 +1,7 @@
 # FORK Information
 
 ## Reson:
-This fork was created to provide a reliable, stable, and fully non-blocking solution for automated holoprojector movement within the DroidLink ecosystem.  
+This fork was created to provide a reliable, stable, and fully non-blocking solution for automated holoprojector movement when paired with the DroidLink ecosystem created by Fred Moore.  
 
 The original DroidLink + Maestro setup works extremely well for dome panels and sequencing, but automated holoprojector behavior could interfere with running panel scripts and other timed actions. This project moves holoprojector automation away from the Maestro and into AstroPixelsPlus, allowing both systems to operate independently without conflicts.
 
@@ -29,6 +29,7 @@ Example: during a Leia playback sequence, the front holoprojector can stop movin
 ## Control:
 Primary control is handled through serial commands sent from the DroidLink Display system to control holoprojector moods:
 
+* On/Off
 * Calm
 * Normal
 * Excited
@@ -37,12 +38,12 @@ Primary control is handled through serial commands sent from the DroidLink Displ
 The R2 Touch app continues to function normally and can also trigger these same commands if desired.
 
 Additional customization is available directly through the AstroPixelsPlus web interface. A new Holoprojector configuration panel has been added for live tuning and adjustment.
+
 ## Instrucrions:
 
 This is a modified version of the AstroPixelsPlus firmware designed specifically to integrate more cleanly with the DroidLink astromech control system developed by Fred Moore.
 
-DroidLink works exceptionally well with Pololu Maestro Servo Controllers
- for dome panel control, but automated holoprojector movement was difficult to manage cleanly through Maestro scripting alone.
+DroidLink works exceptionally well with Pololu Maestro Servo Controllers for dome panel control, but automated holoprojector movement was difficult to manage cleanly through Maestro scripting alone.
 
 This fork keeps the holoprojectors connected to AstroPixelsPlus while adding:
 
@@ -55,7 +56,7 @@ This fork keeps the holoprojectors connected to AstroPixelsPlus while adding:
 
 All original AstroPixelsPlus functionality has been retained, although some configuration changes were made to better align with DroidLink usage.
 
-The servo board layout has changed for this configuration.
+The servo board layout has changed for this configuration. You can still use both boards if you want to control panels but the main idea behind this change is to use Maestro for panels and AstroPixelsPlus for holo movement only. 
 
 <table align="center">
 <tr>
@@ -92,48 +93,26 @@ The servo board layout has changed for this configuration.
 </tr>
 </table>
 
-Automated Holoprojector Movement
-
-The primary feature of this project is automated holoprojector movement with live customization.
-
-AstroPixelsPlus automatically begins random holoprojector movement during startup. Three preset “moods” can be triggered at any time using serial commands from DroidLink Display.
-
-
-
-Web Interface
+## Web Interface
 
 A new Holoprojector page has been added to the AstroPixelsPlus web interface.
 
 From this screen you can adjust:
 
-Burst Size
-Burst Speed
-Idle Time
+* Burst Size
+* Burst Speed
+* Idle Time
+* Presets
 
 Changes update live in real time and can usually be observed within a few seconds.
 
 Settings can also be saved so they persist after reboot. If settings are not saved, the system defaults back to Normal mode during startup.
 
 Important
-Slider adjustments update immediately in real time
-Preset buttons and serial commands also update the active settings
-After changing modes via serial command or preset button, press Refresh Sliders to update the displayed values in the GUI
-
-
-
-
-
-The other improvement (and the main reason for doing this project) is automated holoprojector movements with cusomeazation. I set up Astropixles to randomly move the 3 holoprojectors automatically upon system bootup.  Three moods are preset that can be activated by sending serial commands from the DroidLink Display.
-
-Calm - *HLC1  
-Normal - *HLN1  
-Excited - *HLE1  
-Save - *HLSV  
-
-Further cusrtomazation can be found in the AstroPixlesPlus web interface. A new 'Holoprojector' screen has been added on the main screen. From here you can adjust the minimum and maximum values for Burst behivior, burst speed, and idle time. Adjusting these settings will update live and can be noticed within a  few seconds of activation. There is a save button that can save the current values so the next time the system restarts it will start up at what it was saved at, otherwise it reverts to 'Normal" mode. 
-
-If you adjust the settings via the sliders they update in real time. If you adjust the moods via serial commands, or pressing the preset buttons, you have to push 'Refresh Sliders' in order to see the current values. 
-
+* Slider adjustments update immediately in real time
+* Preset buttons and serial commands also update the active settings
+* After changing modes via serial command or preset button, press Refresh Sliders to update the displayed values in the GUI  
+  
 <div align="center">
   <table>
     <tr>
@@ -145,27 +124,36 @@ If you adjust the settings via the sliders they update in real time. If you adju
     </tr>
   </table>
 </div>
-
  
-### Slider Description
+## Slider Description
 
 ### Burst Size
-How many movements happen in a row. This controls how many quick actions happen before the system pauses.
-1–2 → very calm, sparse motion (sleepy droid)
-1–4 → natural idle behavior (good default)
+How many movements happen in a row. This controls how many quick actions happen before the system pauses.  
+1–2 → very calm, sparse motion (sleepy droid)  
+1–4 → natural idle behavior (good default)  
 3–6 → active / alert / “thinking a lot”
 
 ### Burst Speed
-How fast actions happen. This is the delay between movements inside a burst.
-200–400 ms → twitchy / nervous / reactive
-400–900 ms → natural mechanical motion (recommended)
+How fast actions happen. This is the delay between movements inside a burst.    
+200–400 ms → twitchy / nervous / reactive  
+400–900 ms → natural mechanical motion (recommended)  
 900–1500 ms → slow, heavy, deliberate movement
 
 ### Idle Time
-Pause between bursts. This is how long the system “does nothing” before starting another burst.
-1000–3000 ms → very active, almost constantly moving
-3000–8000 ms → balanced, natural idle behavior (good default)
-8000–20000 ms → slow, observant, cinematic R2-style pauses
+Pause between bursts. This is how long the system “does nothing” before starting another burst.  
+1000–3000 ms → very active, almost constantly moving  
+3000–8000 ms → balanced, natural idle behavior (good default)  
+8000–20000 ms → slow, observant, cinematic R2-style pauses  
+
+## Serial Commands
+These are the serial commands that can be sent from the DroidLink Display to turn on/off the automation, change mood, and save configuration. 
+
+* Calm - *HLC1  
+* Normal - *HLN1  
+* Excited - *HLE1  
+* Save - *HLSV 
+* Automation On - *HLON
+* Automation Off - *HLOFF
 
 ## Web Installer: 
 https://cosplay-ken.github.io/AstroPixelsPlus-Prod/
