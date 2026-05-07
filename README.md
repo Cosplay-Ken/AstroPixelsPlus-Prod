@@ -2,9 +2,25 @@
 
 This is a modification of the AstroPixlesPlus firmware that better incorporates with the DroidLink astromech control system developed by Fred Moore.
 
-All functionality of the origional AstroPixelsPlus firmware have been retained. The following items have been changed or added.
+All functionality of the origional AstroPixelsPlus firmware have been retained but some changes were made to align with using DroidLink.  The following items have been changed or added.
 
-Servo Board layout has changed. Board 1 (position 1-6) are now assigned to the holoprojectr servos. Board 2 (position 1-13) are assigned to panels. 
+ Servo Board layout has changed. Board 1 (position 1-6) are now assigned to the holoprojectr servos. Board 2 (position 1-13) are assigned to panels.
+
+ 
+Board 1
+
+Position 1 Front Holo Horizontal
+Position 2 Front Holo Vertical
+Position 3 Top Holo Horizontal
+         Position 4 Top Holo Vertical
+         Position 5 Rear Holo Vertical
+         Position 6 Rear Holo Horizontal
+
+*     Board 2
+*         Position 1 Panel 4
+*         Position 2 Panel 3
+*         Position 3 Panel 2
+*         Position 4 Panel 1
 
 
     // First PCA9685 controller
