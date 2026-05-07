@@ -1,53 +1,68 @@
 # FORK Information
 
-This is a modification of the AstroPixlesPlus firmware that better incorporates with the DroidLink astromech control system developed by Fred Moore.
+## Reson:
+I could not find a reliable, stable, non blocking way to have the DroidLInk Dome maestro automate random holoprojector movements and moods without interfeering with existing panel sequences and scripts. 
 
-All functionality of the origional AstroPixelsPlus firmware have been retained but some changes were made to align with using DroidLink.  The following items have been changed or added.
+## Scope: 
+To have a non blocking way to automate, custominze, and control the random behivior of the holoprojectors to free up scripting and sequences from the dome panel Maestro of DroidLink. Aslo to be able to inturupt the automation when specific movements are required, then resume after complete.
 
- Servo Board layout has changed. Board 1 (position 1-6) are now assigned to the holoprojectr servos. Board 2 (position 1-13) are assigned to panels.
+## Results:
+Holoprojector movement, control, and automation has been offloaded from maestro to AstropixlesPlus. These movements can be inturupted if specific movemends are sent with other serial commands (such as stopping front holoprojector movement during the Leia playback message)
+
+
+
+## Instrucrions:
+
+This is a modification of the AstroPixlesPlus firmware that better incorporates with the DroidLink astromech control system developed by Fred Moore. DroidLink is best used with Polulu Maestro servo boards but does not script the automated holoprojector movements very well. This update keeps the Holoprojectors attached to AstroPixelsPlus and adds automation and customazation to randomely move the 3 holoprojectors and toggle to three preset modes. It offers 4 new serail commands to add to DroidLink Display to trigger these moods with the press of a button. Additional customazation can be performed in the AstopPixels Plus GUI by adjusting settings sliders to meet your particular needs. The setting take affect immediately and can also be saved, so the settings return after a reboot.  
+
+All functionality of the origional AstroPixelsPlus firmware have been retained but some changes were made to align with using DroidLink.  The following prequestie is required for this configuration.
+
+Servo Board layout has changed. Board 1 (position 1-6) are now assigned to the holoprojectr servos. Board 2 (position 1-13) are assigned to panels. If using droidLink board 2 is no longer required since panel movement will be controled by the maestro board. 
+
+<table align="center">
+<tr>
+<td valign="top" align="left">
+
+### Board 1
+- Position 1 - Front Holo Horizontal
+- Position 2 - Front Holo Vertical
+- Position 3 - Top Holo Horizontal
+- Position 4 - Top Holo Vertical
+- Position 5 - Rear Holo Horizontal
+- Position 6 - Rear Holo Vertical
+
+</td>
+
+<td valign="top" align="left">
+
+### Board 2 (Optional)
+- Position 1 - Panel 4
+- Position 2 - Panel 3
+- Position 3 - Panel 2
+- Position 4 - Panel 1
+- Position 5 - Panel 5
+- Position 6 - Panel 9
+- Position 7 - Mini Panel 2
+- Position 8 - Mini Front PSI Panel
+- Position 9 - Pie Panel 1
+- Position 10 - Pie Panel 2
+- Position 11 - Pie Panel 3
+- Position 12 - Pie Panel 4
+- Position 13 - Top Dome Panel
+
+</td>
+</tr>
+</table>
+
+
+The other improvement (and the main reason for doing this project) is automated holoprojector movements with cusomeazation. I set up Astropixles to randomly move the 3 holoprojectors automatically upon system bootup. This can be stopped by sending a *ST00 serial command from DroidLink Display. Three moods are preset that are also connected to serial commands.   
+Calm - *HLC1  
+Normal - *HLN1  
+Excited - *HLE1  
+
+
 
  
-Board 1
-
-Position 1 Front Holo Horizontal
-Position 2 Front Holo Vertical
-Position 3 Top Holo Horizontal
-         Position 4 Top Holo Vertical
-         Position 5 Rear Holo Vertical
-         Position 6 Rear Holo Horizontal
-
-*     Board 2
-*         Position 1 Panel 4
-*         Position 2 Panel 3
-*         Position 3 Panel 2
-*         Position 4 Panel 1
-
-
-    // First PCA9685 controller
-    {1, 800, 2200, PANEL_GROUP_4 | SMALL_PANEL},  /* 0: door 4 */
-    {2, 800, 2200, PANEL_GROUP_3 | SMALL_PANEL},  /* 1: door 3 */
-    {3, 800, 2200, PANEL_GROUP_2 | SMALL_PANEL},  /* 2: door 2 */
-    {4, 800, 2200, PANEL_GROUP_1 | SMALL_PANEL},  /* 3: door 1 */
-    {5, 800, 2200, PANEL_GROUP_5 | MEDIUM_PANEL}, /* 4: door 5 */
-    {6, 800, 2200, PANEL_GROUP_6 | BIG_PANEL},    /* 5: door 9 */
-    {7, 800, 2200, MINI_PANEL},                   /* 6: mini door 2 */
-    {8, 800, 2200, MINI_PANEL},                   /* 7: mini front psi door */
-    {9, 800, 2200, PANEL_GROUP_10 | PIE_PANEL},   /* 8: pie panel 1 */
-    {10, 800, 2200, PANEL_GROUP_9 | PIE_PANEL},   /* 9: pie panel 2 */
-    {11, 800, 2200, PANEL_GROUP_8 | PIE_PANEL},   /* 10: pie panel 3 */
-    {12, 800, 2200, PANEL_GROUP_7 | PIE_PANEL},   /* 11: pie panel 4 */
-    {13, 800, 2200, TOP_PIE_PANEL},               /* 12: dome top panel */
-
-    // Second PCA9685 controller
-    {16, 800, 2200, HOLO_HSERVO}, /* 13: horizontal front holo */
-    {17, 800, 2200, HOLO_VSERVO}, /* 14: vertical front holo */
-    {18, 800, 2200, HOLO_HSERVO}, /* 15: horizontal top holo */
-    {19, 800, 2200, HOLO_VSERVO}, /* 16: vertical top holo */
-    {20, 800, 2200, HOLO_VSERVO}, /* 17: vertical rear holo */
-    {21, 800, 2200, HOLO_HSERVO}, /* 18: horizontal rear holo */
-
-
-
 
 
 unsigned long lastMoveTime = 0;
