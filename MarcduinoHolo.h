@@ -455,3 +455,16 @@ MARCDUINO_ACTION(HoloSave, *HLSV, ({
     saveHoloSettings();
     triggerHoloAck(99);
 }))
+
+////////////////
+
+MARCDUINO_ACTION(HoloAutoOff, *HLOFF, ({
+    holoAutomationEnabled = false;
+}))
+
+////////////////
+
+MARCDUINO_ACTION(HoloAutoOn, *HLON, ({
+    holoAutomationEnabled = true;
+    lastMoveTime = millis();
+}))

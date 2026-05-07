@@ -49,6 +49,8 @@ bool holoAckActive = false;
 unsigned long holoAckEnd = 0;
 uint8_t holoAckMode = 0;
 
+bool holoAutomationEnabled = true;
+
 ////////////////////////////////
 
 #if defined(USE_RSERIES_FLD) || defined(USE_RSERIES_RLD) || defined(USE_RSERIES_RLD_CURVED)

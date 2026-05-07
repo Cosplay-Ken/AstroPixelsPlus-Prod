@@ -25,6 +25,8 @@ extern bool holoAckActive;
 extern unsigned long holoAckEnd;
 extern uint8_t holoAckMode;
 
+extern bool holoAutomationEnabled;
+
 ////////////////////////////////////////////////////////////////////////////////
 // HOLO MODE CONFIGURATION
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,6 +109,11 @@ inline void triggerHoloAck(uint8_t mode)
 
 inline void updateHoloMovement()
 {
+    if (!holoAutomationEnabled)
+    {
+        return;
+    }    
+    
     unsigned long currentTime = millis();
 
     // ---------------- ACK HANDLING ----------------
