@@ -66,12 +66,15 @@ Further cusrtomazation can be found in the AstroPixlesPlus web interface. A new 
 
 If you adjust the settings via the sliders they update in real time. If you adjust the moods via serial commands, or pressing the preset buttons, you have to push 'Refresh Sliders' in order to see the current values. 
 
+<table>
+  <tr>
+<td><img width="288" height="624" alt="Screenshot_20260507-082505" src="https://github.com/user-attachments/assets/442c121d-7e9d-4796-ade8-8c625ccf3b91" /></td>
+ 
+<td><img width="288" height="624" alt="Screenshot_20260507-082519" src="https://github.com/user-attachments/assets/1f497b4d-5bc4-439d-bda0-0b8f9344ee8e" /></td>
+</table>
+</table>
 
-<img width="288" height="624" alt="Screenshot_20260507-082505" src="https://github.com/user-attachments/assets/442c121d-7e9d-4796-ade8-8c625ccf3b91" />
-
-<img width="288" height="624" alt="Screenshot_20260507-082519" src="https://github.com/user-attachments/assets/1f497b4d-5bc4-439d-bda0-0b8f9344ee8e" />
-
-
+ 
 The decritptions of the setting is as follows.
 
 ### Burst Size
@@ -93,9 +96,7 @@ Pause between bursts. This is how long the system “does nothing” before star
 8000–20000 ms → slow, observant, cinematic R2-style pauses
 
 ### Web Installer: 
-
-
-#
-
+https://cosplay-ken.github.io/AstroPixelsPlus-Prod/
  
-# Origional AstroPixlesPlus Documentation
+### Origional AstroPixlesPlus Documentation
+https://github.com/reeltwo/AstroPixelsPlus
