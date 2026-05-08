@@ -3,7 +3,7 @@
 ## Reason:
 This fork was created to provide a reliable, stable, and fully non-blocking solution for automated holoprojector movement when paired with the DroidLink ecosystem created by Fred Moore.  
 
-The original DroidLink + Maestro setup works extremely well for dome panels and sequencing, but automated holoprojector behavior could interfere with running panel scripts and other timed actions. This project moves holoprojector automation away from the Maestro and into AstroPixelsPlus, allowing both systems to operate independently without conflicts.
+DroidLink + Maestro setup works extremely well for dome panels and sequencing, but automated holoprojector behavior could interfere with running panel scripts and other timed actions. This project moves holoprojector automation away from the Maestro and into AstroPixelsPlus, allowing both systems to operate independently without conflicts.
 
 ## Scope: 
 The goal of this project is to:
@@ -23,6 +23,8 @@ This allows:
 * Cleaner DroidLink panel scripting
 * Real-time mood changes
 * Interruptible movements for special sequences
+* Non-blocking behavior
+* Web-based tuning controls
 
 Example: during a Leia playback sequence, the front holoprojector can stop moving while audio or scripted events occur, then automatically resume idle behavior afterward.
 
@@ -41,19 +43,6 @@ Additional customization is available directly through the AstroPixelsPlus web i
 
 ## Instructions:
 
-This is a modified version of the AstroPixelsPlus firmware designed specifically to integrate more cleanly with the DroidLink astromech control system developed by Fred Moore.
-
-DroidLink works exceptionally well with Pololu Maestro Servo Controllers for dome panel control, but automated holoprojector movement was difficult to manage cleanly through Maestro scripting alone.
-
-This fork keeps the holoprojectors connected to AstroPixelsPlus while adding:
-
-* Automated random holoprojector movement
-* Multiple movement “moods”
-* Real-time customization
-* Non-blocking behavior
-* Script interruption handling
-* Web-based tuning controls
-
 All original AstroPixelsPlus functionality has been retained, although some configuration changes were made to better align with DroidLink usage.
 
 The servo board layout has changed for this configuration. You can still use both boards if you want to control panels but the main idea behind this change is to use Maestro for panels and AstroPixelsPlus for holo movement only. 
@@ -62,7 +51,7 @@ The servo board layout has changed for this configuration. You can still use bot
 <tr>
 <td valign="top" align="left">
 
-### Board 1
+### Board 1 (Required)
 - Position 1 - Front Holo Horizontal
 - Position 2 - Front Holo Vertical
 - Position 3 - Top Holo Horizontal
