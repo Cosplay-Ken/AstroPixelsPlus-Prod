@@ -117,21 +117,21 @@ Important
 
 ### Burst Size
 How many movements happen in a row. This controls how many quick actions happen before the system pauses.  
-1–2 → very calm, sparse motion (sleepy droid)  
-1–4 → natural idle behavior (good default)  
-3–6 → active / alert / “thinking a lot”
+* 1–2 → very calm, sparse motion (sleepy droid)  
+* 1–4 → natural idle behavior (good default)  
+* 3–6 → active / alert / “thinking a lot”
 
 ### Burst Speed
 How fast actions happen. This is the delay between movements inside a burst.    
-200–400 ms → twitchy / nervous / reactive  
-400–900 ms → natural mechanical motion (recommended)  
-900–1500 ms → slow, heavy, deliberate movement
+* 200–400 ms → twitchy / nervous / reactive  
+* 400–900 ms → natural mechanical motion (recommended)  
+* 900–1500 ms → slow, heavy, deliberate movement
 
 ### Idle Time
 Pause between bursts. This is how long the system “does nothing” before starting another burst.  
-1000–3000 ms → very active, almost constantly moving  
-3000–8000 ms → balanced, natural idle behavior (good default)  
-8000–20000 ms → slow, observant, cinematic R2-style pauses  
+* 1000–3000 ms → very active, almost constantly moving
+* 3000–8000 ms → balanced, natural idle behavior (good default)  
+* 8000–20000 ms → slow, observant, cinematic R2-style pauses  
 
 ## Serial Commands
 These are the serial commands that can be sent from the DroidLink Display to turn on/off the automation, change mood, and save configuration. 
