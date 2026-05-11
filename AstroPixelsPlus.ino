@@ -49,7 +49,7 @@ bool holoAckActive = false;
 unsigned long holoAckEnd = 0;
 uint8_t holoAckMode = 0;
 
-bool holoAutomationEnabled = true;
+bool holoAutomationEnabled = false;
 
 ////////////////////////////////
 
@@ -183,7 +183,7 @@ bool holoAutomationEnabled = true;
 
 ////////////////////////////////
 
-#define MARC_SERIAL2_BAUD_RATE 2400
+#define MARC_SERIAL2_BAUD_RATE 9600
 #define MARC_SERIAL_PASS true
 #define MARC_SERIAL_ENABLED true
 #define MARC_WIFI_ENABLED true
@@ -693,6 +693,9 @@ void setup()
         COMMAND_SERIAL.begin(preferences.getInt(PREFERENCE_MARCSERIAL2, MARC_SERIAL2_BAUD_RATE), SERIAL_8N1, SERIAL2_RX_PIN, SERIAL2_TX_PIN);
         // if (preferences.getBool(PREFERENCE_MARCSERIAL_PASS, MARC_SERIAL_PASS))
 
+        DEBUG_PRINT("Serial2 Baud: ");
+        DEBUG_PRINTLN(preferences.getInt(PREFERENCE_MARCSERIAL2, MARC_SERIAL2_BAUD_RATE));
+
         marcduinoSerial.setStream(&COMMAND_SERIAL, &Serial);
     }
     if (!mountReadOnlyFileSystem())
@@ -1165,7 +1168,10 @@ void mainLoop()
 {
     AnimatedEvent::process();
     
-    updateHoloMovement();
+    if (holoAutomationEnabled)
+    {
+        updateHoloMovement();
+    }
 
     sMarcSound.idle();
 #ifdef USE_MENUS

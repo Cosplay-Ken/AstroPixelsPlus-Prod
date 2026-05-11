@@ -294,9 +294,10 @@ WElement serialContents[] =
 {
     WSelect("Serial2 Baud Rate", "serial2baud",
         swBaudRates, SizeOfArray(swBaudRates),
-        []() { return (marcSerial2Baud = (preferences.getInt(PREFERENCE_MARCSERIAL2, MARC_SERIAL2_BAUD_RATE)) == 2400) ? 0 : 1; },
-        [](int val) { marcSerial2Baud = (val == 0) ? 2400 : 9600; }),
-
+        []() { marcSerial2Baud = preferences.getInt(PREFERENCE_MARCSERIAL2, MARC_SERIAL2_BAUD_RATE);
+               return (marcSerial2Baud == 9600) ? 1 : 0; },
+        [](int val) { marcSerial2Baud = (val == 1) ? 9600 : 2400; }),
+        
     WVerticalAlign(),
 
     WCheckbox("Serial pass-through to Serial2", "serialpass",

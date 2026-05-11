@@ -431,6 +431,7 @@ MARCDUINO_ACTION(HoloCommand, @HP, ({
 ////////////////
 
 MARCDUINO_ACTION(HoloCalm, *HLC1, ({
+    holoAutomationEnabled = true;
     applyHoloMode(0);
     triggerHoloAck(0);
 }))
@@ -438,6 +439,7 @@ MARCDUINO_ACTION(HoloCalm, *HLC1, ({
 ////////////////
 
 MARCDUINO_ACTION(HoloNormal, *HLN1, ({
+    holoAutomationEnabled = true;
     applyHoloMode(1);
     triggerHoloAck(1);
 }))
@@ -445,6 +447,7 @@ MARCDUINO_ACTION(HoloNormal, *HLN1, ({
 ////////////////
 
 MARCDUINO_ACTION(HoloExcited, *HLE1, ({
+    holoAutomationEnabled = true;
     applyHoloMode(2);
     triggerHoloAck(2);
 }))
