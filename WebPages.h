@@ -140,7 +140,7 @@ WElement holoContents[] =
         []()->int { return burstMax; },
         [](int val) { burstMax = val; }),
 
-        // Burst speed
+    // Burst speed
     WSlider("Burst Speed Min (ms)", "bsm", 100, 2000,
         []()->int { return burstSpeedMin; },
         [](int val) { burstSpeedMin = val; }),
@@ -149,7 +149,7 @@ WElement holoContents[] =
         []()->int { return burstSpeedMax; },
         [](int val) { burstSpeedMax = val; }),
 
-        // Idle timing
+    // Idle timing
     WSlider("Idle Min (ms)", "idlemin", 500, 20000,
         []()->int { return idleMin; },
         [](int val) { idleMin = val; }),
