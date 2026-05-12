@@ -35,6 +35,7 @@ Primary control is handled through serial commands sent from the DroidLink Displ
 * Calm
 * Normal
 * Excited
+* Random
 * Save Current Settings
 
 The R2 Touch app continues to function normally and can also trigger these same commands if desired.
@@ -90,7 +91,7 @@ From this screen you can adjust:
 * Burst Size
 * Burst Speed
 * Idle Time
-* Presets
+* Presets (Calm, Normal, Excited, Random)
 
 Changes update live in real time and can usually be observed within a few seconds.
 
@@ -108,7 +109,7 @@ Important
     <td><img width="288" height="624" alt="Screenshot_20260507-082505" src="https://github.com/user-attachments/assets/442c121d-7e9d-4796-ade8-8c625ccf3b91" /></td>
        <td width="80"></td>
      <!-- Second Image -->
-    <td><img width="288" height="624" alt="Screenshot_20260507-082519" src="https://github.com/user-attachments/assets/1f497b4d-5bc4-439d-bda0-0b8f9344ee8e" /></td>
+    <td><img width="288" height="624" alt="Screenshot_20260507-082519" src="https://github.com/user-attachments/assets/a8df07dc-1494-4fa0-8cda-30cbe2913b3a" /></td>
     </tr>
   </table>
 </div>
@@ -138,7 +139,8 @@ These are the serial commands that can be sent from the DroidLink Display to tur
 
 * Calm - *HLC1  
 * Normal - *HLN1  
-* Excited - *HLE1  
+* Excited - *HLE1
+* Random - *HLR1
 * Save - *HLSV 
 * Automation On - *HLON
 * Automation Off - *HLOFF
@@ -149,6 +151,7 @@ When a serial command is processed, or a preset button is used in the web portal
 * Calm — Blue
 * Normal — Green
 * Excited — Red
+* Random - Rainbow
 * Saved — Flashing White
 
 ## Web Installer: 
