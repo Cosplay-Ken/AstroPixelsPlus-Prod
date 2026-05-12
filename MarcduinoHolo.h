@@ -432,7 +432,9 @@ MARCDUINO_ACTION(HoloCommand, @HP, ({
 
 MARCDUINO_ACTION(HoloCalm, *HLC1, ({
     holoAutomationEnabled = true;
-    applyHoloMode(0);
+    holoRandomMode = false;
+    currentHoloMode = 0;
+    applyHoloMode(currentHoloMode);
     triggerHoloAck(0);
 }))
 
@@ -440,7 +442,9 @@ MARCDUINO_ACTION(HoloCalm, *HLC1, ({
 
 MARCDUINO_ACTION(HoloNormal, *HLN1, ({
     holoAutomationEnabled = true;
-    applyHoloMode(1);
+    holoRandomMode = false;
+    currentHoloMode = 1;
+    applyHoloMode(currentHoloMode);
     triggerHoloAck(1);
 }))
 
@@ -448,8 +452,19 @@ MARCDUINO_ACTION(HoloNormal, *HLN1, ({
 
 MARCDUINO_ACTION(HoloExcited, *HLE1, ({
     holoAutomationEnabled = true;
-    applyHoloMode(2);
+    holoRandomMode = false;
+    currentHoloMode = 2;
+    applyHoloMode(currentHoloMode);
     triggerHoloAck(2);
+}))
+
+////////////////
+
+MARCDUINO_ACTION(HoloRandom, *HLR1, ({
+    holoAutomationEnabled = true;
+    holoRandomMode = true;
+    nextMoodChange = millis() + random(300000, 480000);
+    triggerHoloAck(3);
 }))
 
 ////////////////
@@ -469,5 +484,20 @@ MARCDUINO_ACTION(HoloAutoOff, *HLOFF, ({
 
 MARCDUINO_ACTION(HoloAutoOn, *HLON, ({
     holoAutomationEnabled = true;
+    currentHoloMode =
+        preferences.getInt(PREFERENCE_HOLO_MODE, 1);
+    holoRandomMode =
+        preferences.getBool(PREFERENCE_HOLO_RANDOM, false);
+    applyHoloMode(currentHoloMode);
     lastMoveTime = millis();
+    if (holoRandomMode)
+    {
+        // prevent instant trigger after restore
+        nextMoodChange =
+            millis() + random(300000, 480000);
+
+        // ensure we don't instantly re-trigger a change
+        if (nextMoodChange < millis() + 60000)
+            nextMoodChange = millis() + 60000;
+}
 }))

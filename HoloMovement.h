@@ -27,6 +27,10 @@ extern uint8_t holoAckMode;
 
 extern bool holoAutomationEnabled;
 
+extern bool holoRandomMode;
+extern uint8_t currentHoloMode;
+extern unsigned long nextMoodChange;
+
 ////////////////////////////////////////////////////////////////////////////////
 // HOLO MODE CONFIGURATION
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,36 +75,82 @@ inline void applyHoloMode(uint8_t mode)
 inline void triggerHoloAck(uint8_t mode)
 {
     holoAckActive = true;
-    holoAckEnd = millis() + 300;
+    holoAckEnd = millis() + 500;
     holoAckMode = mode;
 
     switch (mode)
     {
         case 0:
-            CommandEvent::process(F("HPA0000"));
+            CommandEvent::process(F("HPF0000"));
             delay(10);
             CommandEvent::process(F("HPF0055")); // Blue / Calm
             break;
 
         case 1:
-            CommandEvent::process(F("HPA0000"));
+            CommandEvent::process(F("HPF0000"));
             delay(10);
             CommandEvent::process(F("HPF0053")); // Green / Normal
             break;
 
         case 2:
-            CommandEvent::process(F("HPA0000"));
+            CommandEvent::process(F("HPF0000"));
             delay(10);
             CommandEvent::process(F("HPF0051")); // Red / Excited
             break;
 
+        case 3:
+            CommandEvent::process(F("HPF0000"));
+            delay(10);
+            CommandEvent::process(F("HPF006")); // Rainbow / Random
+            break;            
+
         case 99:
-            CommandEvent::process(F("HPA0000"));
+            CommandEvent::process(F("HPF0000"));
             delay(10);
             CommandEvent::process(F("HPF0029")); // White Flicker / Save
             holoAckEnd = millis() + 1000;
             break;    
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// HOLO STATUS / DEBUG OUTPUT
+////////////////////////////////////////////////////////////////////////////////
+
+const char* holoModeToString(uint8_t mode)
+{
+    switch (mode)
+    {
+        case 0: return "Calm";
+        case 1: return "Normal";
+        case 2: return "Excited";
+        default: return "Unknown";
+    }
+}
+
+void printHoloStatus()
+{
+    Serial.print("[HOLO] Mode: ");
+    Serial.print(holoModeToString(currentHoloMode));
+
+    Serial.print(" | Random: ");
+    Serial.print(holoRandomMode ? "ON" : "OFF");
+
+    Serial.print(" | Automation: ");
+    Serial.print(holoAutomationEnabled ? "ON" : "OFF");
+
+    Serial.print(" | NextMood(s): ");
+
+    if (nextMoodChange > millis())
+    {
+        Serial.print((nextMoodChange - millis()) / 1000);
+    }
+    else
+    {
+        Serial.print(0);
+    }
+
+    Serial.println();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -115,6 +165,23 @@ inline void updateHoloMovement()
     }    
     
     unsigned long currentTime = millis();
+
+    // ---------------- RANDOM MOOD MODE ----------------
+    if (holoRandomMode)
+    {
+        if (currentTime >= nextMoodChange)
+        {
+            uint8_t randomMode;
+            do
+            {
+                randomMode = random(0, 3);
+            }
+            while (randomMode == currentHoloMode);
+            currentHoloMode = randomMode;
+            applyHoloMode(currentHoloMode);
+            nextMoodChange = currentTime + random(300000, 480000);
+        }
+    }
 
     // ---------------- ACK HANDLING ----------------
     if (holoAckActive)
@@ -190,5 +257,13 @@ inline void updateHoloMovement()
         }
 
         lastMoveTime = currentTime;
+    }
+
+    static unsigned long lastDebugPrint = 0;
+
+    if (millis() - lastDebugPrint > 2000)
+    {
+        printHoloStatus();
+        lastDebugPrint = millis();
     }
 }

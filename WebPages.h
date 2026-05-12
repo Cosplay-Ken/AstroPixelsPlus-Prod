@@ -140,9 +140,7 @@ WElement holoContents[] =
         []()->int { return burstMax; },
         [](int val) { burstMax = val; }),
 
-    WVerticalAlign(),
-
-    // Burst speed
+        // Burst speed
     WSlider("Burst Speed Min (ms)", "bsm", 100, 2000,
         []()->int { return burstSpeedMin; },
         [](int val) { burstSpeedMin = val; }),
@@ -151,9 +149,7 @@ WElement holoContents[] =
         []()->int { return burstSpeedMax; },
         [](int val) { burstSpeedMax = val; }),
 
-    WVerticalAlign(),
-
-    // Idle timing
+        // Idle timing
     WSlider("Idle Min (ms)", "idlemin", 500, 20000,
         []()->int { return idleMin; },
         [](int val) { idleMin = val; }),
@@ -163,6 +159,7 @@ WElement holoContents[] =
         [](int val) { idleMax = val; }),
 
     WLabel("Presets", "label3"),
+
     WVerticalAlign(),
 
     // Preset buttons
@@ -170,10 +167,18 @@ WElement holoContents[] =
     WHorizontalAlign(),
     WButton("Normal", "normal", []() { Marcduino::processCommand(player, "*HLN1"); }),
     WButton("Excited", "excited", []() { Marcduino::processCommand(player, "*HLE1"); }),
+    WButton("Random", "random", []() { Marcduino::processCommand(player, "*HLR1"); }),
+    
+    WVerticalAlign(),
 
+    WButton("Automation ON", "autoon", []() { Marcduino::processCommand(player, "*HLON"); }),
+    WHorizontalAlign(),
+    WButton("Automation OFF", "autooff", []() { Marcduino::processCommand(player, "*HLOFF"); }),
+    
     WVerticalAlign(),
 
     WButton("Refresh Sliders", "refreshslider", "/holo"),
+    
     WVerticalAlign(),
 
     // Save settings
@@ -184,7 +189,9 @@ WElement holoContents[] =
 
     WHorizontalAlign(),
     WButton("Home", "home", "/"),
+    
     WVerticalAlign(),
+    
     rseriesSVG
 };
 

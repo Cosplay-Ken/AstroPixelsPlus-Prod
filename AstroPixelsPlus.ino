@@ -51,6 +51,10 @@ uint8_t holoAckMode = 0;
 
 bool holoAutomationEnabled = false;
 
+bool holoRandomMode = false;
+uint8_t currentHoloMode = 1;
+unsigned long nextMoodChange = 0;
+
 ////////////////////////////////
 
 #if defined(USE_RSERIES_FLD) || defined(USE_RSERIES_RLD) || defined(USE_RSERIES_RLD_CURVED)
@@ -129,12 +133,14 @@ bool holoAutomationEnabled = false;
 
 ////////////////////////////////
 
-#define PREFERENCE_HOLO_BURST_MIN    "holo_bmin"
+#define PREFERENCE_HOLO_BURST_MIN     "holo_bmin"
 #define PREFERENCE_HOLO_BURST_MAX     "holo_bmax"
 #define PREFERENCE_HOLO_BSPEED_MIN    "holo_bsmin"
 #define PREFERENCE_HOLO_BSPEED_MAX    "holo_bsmax"
 #define PREFERENCE_HOLO_IDLE_MIN      "holo_imin"
 #define PREFERENCE_HOLO_IDLE_MAX      "holo_imax"
+#define PREFERENCE_HOLO_MODE          "holomode"
+#define PREFERENCE_HOLO_RANDOM        "holorandom"
 
 ////////////////////////////////
 
@@ -596,6 +602,8 @@ void saveHoloSettings()
     preferences.putInt(PREFERENCE_HOLO_BSPEED_MAX, burstSpeedMax);
     preferences.putInt(PREFERENCE_HOLO_IDLE_MIN, idleMin);
     preferences.putInt(PREFERENCE_HOLO_IDLE_MAX, idleMax);
+    preferences.putInt(PREFERENCE_HOLO_MODE, currentHoloMode);
+    preferences.putBool(PREFERENCE_HOLO_RANDOM, holoRandomMode);
 }
 
 ////////////////////////////////
