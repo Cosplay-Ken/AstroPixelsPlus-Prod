@@ -158,6 +158,14 @@ WElement holoContents[] =
         []()->int { return idleMax; },
         [](int val) { idleMax = val; }),
 
+    WSlider("Random Mood Min", "rndmoodmin", 1, 30,
+        []()->int { return randomMoodMin; },
+        [](int val) { randomMoodMin = val; }),
+
+    WSlider("Random Mood Max", "rndmoodmax", 1, 60,
+        []()->int { return randomMoodMax; },
+        [](int val) { randomMoodMax = val; }),
+
     WLabel("Presets", "label3"),
 
     WVerticalAlign(),
@@ -182,10 +190,7 @@ WElement holoContents[] =
     WVerticalAlign(),
 
     // Save settings
-    WButton("Save", "saveholo", []()
-    {
-        Marcduino::processCommand(player, "*HLSV");
-    }),
+    WButton("Save", "saveholo", []() { Marcduino::processCommand(player, "*HLSV"); }),
 
     WHorizontalAlign(),
     WButton("Home", "home", "/"),

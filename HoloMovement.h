@@ -31,6 +31,9 @@ extern bool holoRandomMode;
 extern uint8_t currentHoloMode;
 extern unsigned long nextMoodChange;
 
+extern int randomMoodMin;
+extern int randomMoodMax;
+
 ////////////////////////////////////////////////////////////////////////////////
 // HOLO MODE CONFIGURATION
 ////////////////////////////////////////////////////////////////////////////////
@@ -179,7 +182,10 @@ inline void updateHoloMovement()
             while (randomMode == currentHoloMode);
             currentHoloMode = randomMode;
             applyHoloMode(currentHoloMode);
-            nextMoodChange = currentTime + random(300000, 480000);
+            nextMoodChange =
+                currentTime +
+                random(randomMoodMin * 60000UL,
+                    randomMoodMax * 60000UL);
         }
     }
 
@@ -189,7 +195,7 @@ inline void updateHoloMovement()
         if (currentTime >= holoAckEnd)
         {
             holoAckActive = false;
-            CommandEvent::process(F("HPA0000"));
+            CommandEvent::process(F("HPF0000"));
         }
     }
 
@@ -213,6 +219,13 @@ inline void updateHoloMovement()
         int t = idleMin;
         idleMin = idleMax;
         idleMax = t;
+    }
+
+    if (randomMoodMin > randomMoodMax)
+    {
+        int t = randomMoodMin;
+        randomMoodMin = randomMoodMax;
+        randomMoodMax = t;
     }
 
     // ---------------- BURST MOVEMENT LOGIC ----------------

@@ -494,7 +494,9 @@ MARCDUINO_ACTION(HoloAutoOn, *HLON, ({
     {
         // prevent instant trigger after restore
         nextMoodChange =
-            millis() + random(300000, 480000);
+            millis() +
+            random(randomMoodMin * 60000UL,
+                randomMoodMax * 60000UL);
 
         // ensure we don't instantly re-trigger a change
         if (nextMoodChange < millis() + 60000)

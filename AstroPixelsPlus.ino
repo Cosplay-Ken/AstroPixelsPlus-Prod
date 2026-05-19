@@ -55,6 +55,9 @@ bool holoRandomMode = false;
 uint8_t currentHoloMode = 1;
 unsigned long nextMoodChange = 0;
 
+int randomMoodMin = 4;
+int randomMoodMax = 10;
+
 ////////////////////////////////
 
 #if defined(USE_RSERIES_FLD) || defined(USE_RSERIES_RLD) || defined(USE_RSERIES_RLD_CURVED)
@@ -141,6 +144,8 @@ unsigned long nextMoodChange = 0;
 #define PREFERENCE_HOLO_IDLE_MAX      "holo_imax"
 #define PREFERENCE_HOLO_MODE          "holomode"
 #define PREFERENCE_HOLO_RANDOM        "holorandom"
+#define PREFERENCE_HOLO_RANDOM_MIN    "holorndmin"
+#define PREFERENCE_HOLO_RANDOM_MAX    "holorndmax"
 
 ////////////////////////////////
 
@@ -604,6 +609,8 @@ void saveHoloSettings()
     preferences.putInt(PREFERENCE_HOLO_IDLE_MAX, idleMax);
     preferences.putInt(PREFERENCE_HOLO_MODE, currentHoloMode);
     preferences.putBool(PREFERENCE_HOLO_RANDOM, holoRandomMode);
+    preferences.putInt(PREFERENCE_HOLO_RANDOM_MIN, randomMoodMin);
+    preferences.putInt(PREFERENCE_HOLO_RANDOM_MAX, randomMoodMax);
 }
 
 ////////////////////////////////
@@ -688,6 +695,12 @@ void setup()
 
         idleMin = preferences.getInt(PREFERENCE_HOLO_IDLE_MIN, 3000);
         idleMax = preferences.getInt(PREFERENCE_HOLO_IDLE_MAX, 8000);
+
+        randomMoodMin =
+            preferences.getInt(PREFERENCE_HOLO_RANDOM_MIN, 4);
+
+        randomMoodMax =
+            preferences.getInt(PREFERENCE_HOLO_RANDOM_MAX, 10);
     }
 
 #ifdef USE_WIFI
